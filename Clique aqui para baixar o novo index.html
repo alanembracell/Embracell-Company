@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embracell Company - Assistência Técnica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        header img {
+            max-width: 220px;
+            height: auto;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 12px;
+        }
+        input, select {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .os-section {
+            margin-top: 40px;
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            margin: 40px 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Embracell Company">
+    </header>
+
+    <div class="container">
+        <h2>Solicitar Orçamento</h2>
+        <form id="whatsapp-form">
+            <label for="unidade">Escolha a Unidade:</label>
+            <select id="unidade" required>
+                <option value="São João da Canabrava">São João da Canabrava</option>
+                <!-- Outras unidades podem ser adicionadas aqui futuramente -->
+            </select>
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" required>
+
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" required>
+
+            <label for="defeito">Defeito:</label>
+            <input type="text" id="defeito" required>
+
+            <button type="submit">Enviar via WhatsApp</button>
+        </form>
+
+        <div class="os-section">
+            <h2>Consultar Ordem de Serviço</h2>
+            <form onsubmit="return buscarOS();">
+                <label for="codigo">Código da OS:</label>
+                <input type="text" id="codigo" required>
+                <button type="submit">Buscar</button>
+            </form>
+            <div id="resultado-os" style="margin-top:20px;"></div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Embracell Company. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const unidade = document.getElementById('unidade').value;
+            const nome = document.getElementById('nome').value;
+            const marca = document.getElementById('marca').value;
+            const modelo = document.getElementById('modelo').value;
+            const defeito = document.getElementById('defeito').value;
+            const mensagem = `Olá, meu nome é ${nome}. Unidade: ${unidade}. Tenho um aparelho da marca ${marca}, modelo ${modelo}, com o seguinte defeito: ${defeito}. Gostaria de solicitar um orçamento.`;
+            const url = `https://wa.me/5511931519489?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        });
+
+        function buscarOS() {
+            const codigo = document.getElementById("codigo").value;
+            const output = document.getElementById("resultado-os");
+            output.innerHTML = `<strong>Status da OS ${codigo}:</strong> Em andamento.`;
+            return false;
+        }
+    </script>
+</body>
+</html>
